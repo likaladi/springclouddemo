@@ -1,0 +1,19 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: user-consumer # 应用名称
+eureka:
+  client:
+    service-url: # EurekaServer地址
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+#    prefer-ip-address: true # 当调用getHostname获取实例的hostname时，返回ip而不是host名称
+#    ip-address: 127.0.0.1 # 指定自己的ip信息，不指定的话会自己寻找
+    instance-id: ${spring.application.name}:${server.port} #注册服务的实例ID，唯一
+    #服务续约：这两个值在生产环境不要修改，默认即可。（生产环境去掉，开发环境时间调小，方便查看）
+    lease-expiration-duration-in-seconds: 10 #服务失效时间，默认值90秒，超时没发心跳，服务宕机，会从服务列表中移除
+    lease-renewal-interval-in-seconds: 5 #服务续约(renew)的间隔，默认为30秒
+feign:
+  hystrix:
+    enabled: true # 开启Feign的熔断功能

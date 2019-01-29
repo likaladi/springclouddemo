@@ -1,0 +1,9 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 10.10.0.189:9300
+logging:
+  level:
+    com:
+      liwen: debug # 设置com.liwen包的日志级别为debug
